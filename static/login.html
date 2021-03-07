@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        .myDiv {
+          
+            background-color: #1B47DC;  
+          padding-top: 5px; 
+          padding-bottom: 5px;    
+         
+        }
+        </style>
+
+</head>
+
+
+
+<body>
+
+    <div class="myDiv">
+        <center><h1>Cultivo.io</h1></center> 
+       </div>
+    
+
+    <form id="login" data-netlify="true">
+        <table>
+       <br>
+       <h2>Login Page</h2>
+       <tr>
+       <br>
+     Username:  <input type="text" autocomplete="off" name="h" id ="username" placeholder="Username"/></tr>
+      <br>
+      <tr><br> Password: <input type="password" autocomplete="off" name="j"  id ="password" placeholder="Password" /></tr>
+       <br>
+       <br>
+        </table>
+       <input type="submit" name="k" value="Login" class="btn btn-primary" /> <br>
+       <br>
+    
+    </form>
+    <button onclick="myFunction()" class="btn btn-primary">Back</button>
+ <script>
+
+
+function myFunction() {
+  location.replace("http://localhost:9998/index.html")
+}
+
+     const form = document.getElementById('login')
+      form.addEventListener('submit',login)
+      
+      async function login(event)
+      {
+          event.preventDefault()
+          const username= document.getElementById('username').value
+          const password= document.getElementById('password').value
+
+         const result= await fetch('/api/login',{
+              method:'POST',
+              headers:{
+                  'Content-Type': 'application/json'
+              },
+              body:JSON.stringify({
+                  username,
+                  password
+              })
+
+
+          }).then((res) => res.json())
+
+          if(result.status === 'ok')
+          {
+              console.log('Got the token:',result.data)
+               alert('Welcome to cultivo login page '+username)
+          }
+
+          else{
+
+             alert(result.error)
+
+          }
+
+          console.log(result)
+      }
+
+
+
+
+
+
+ </script>
+
+
+</body>
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+</html>

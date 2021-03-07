@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Welcome to</title>
+    <style>
+        .myDiv {
+          
+          background-color: #1B47DC;  
+          padding-top: 5px; 
+          padding-bottom: 5px;
+         
+        }
+        </style>
+
+</head>
+
+<body>
+
+    <div class="myDiv">
+       <center><h1>Cultivo.io</h1></center> 
+      </div>
+   
+<br>
+    <form id="reg-form" data-netlify="true">
+       <table>
+    <tr> Employee Id : <input type="text" autocomplete="off" name="username" id ="username" placeholder="Username"/> <br>
+       <br></tr>
+    <tr> Password : <input type="password" autocomplete="off"  name="b" id ="password" placeholder="Password" />
+       
+       <br>
+
+       <br></tr>
+       <tr>Name : <input type="name" autocomplete="off" name="c" id ="name" placeholder="Name" /></tr>
+       <br>
+       <br>
+       <tr> Designation : <input type="designation" autocomplete="off" name="d" id ="designation" placeholder="Designation" /></tr>
+       <br>
+       <br>
+       <tr> Age : <input type="age" autocomplete="off" name="e" id ="age" placeholder="Age" /></tr>
+       <br>
+       <br>
+       <input type="submit" name="usrname"value="Register" class="btn btn-primary" /> 
+    </table>
+    </form>
+    <br>
+    <button onclick="myFunction()" class="btn btn-primary">Login</button>
+<script>
+
+function myFunction() {
+  location.replace("http://localhost:9998/login.html")
+}
+
+     const form = document.getElementById('reg-form')
+      form.addEventListener('submit',registerUser)
+      async function registerUser(event)
+      {
+          event.preventDefault()
+          const username= document.getElementById('username').value
+          const password= document.getElementById('password').value
+          const name= document.getElementById('name').value
+          const designation= document.getElementById('designation').value
+
+
+          const age= document.getElementById('age').value
+
+         const result= await fetch('/api/register',{
+              method:'POST',
+              headers:{
+                  'Content-Type': 'application/json'
+              },
+              body:JSON.stringify({
+                  username,
+                  password,
+                  name,
+                  designation,
+                  age
+              })
+
+
+          }).then((res) => res.json())
+
+          if(result.status === 'ok')
+          {
+               alert('Successfully Registered')
+          }
+
+          else{
+
+             alert(result.error)
+
+          }
+
+          console.log(result)
+      }
+
+
+
+
+
+
+ </script>
+
+
+</body>
+
+
+
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+</html>
